@@ -9,8 +9,8 @@ class FIFOCache(BaseCaching) :
         super().__init__()
     
     def put(self, key, item):
-        if key not in self.cache_data.keys() and  key != None or item != None :
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS :
+        if key != None or item != None :
+            if key not in self.cache_data.keys() and len(self.cache_data) >= BaseCaching.MAX_ITEMS :
                 self.outFistStack()
             self.cache_data[key] = item
     
