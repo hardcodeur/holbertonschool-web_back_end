@@ -1,31 +1,25 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+BaseCaching = __import__('base_caching').BaseCaching
 
-from base_caching import BaseCaching
+""" Basic LFIO cache implementation."""
 
-""" Basic LIFO cache implementation."""
-
-class LIFOCache(BaseCaching):
-    """LIFO Cache class."""
-
+class LIFOCache(BaseCaching) :
+        
     def __init__(self):
-        """Initialize the LIFO Cache."""
         super().__init__()
 
-    def put(self, key, item):
-        """Add an item to the LIFO Cache."""
-        if key is not None and item is not None:
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                self.discard_last_item()
+    def put(self, key, item):        
+        if key != None or item != None :
+            if key not in self.cache_data.keys() and  len(self.cache_data) >= BaseCaching.MAX_ITEMS :
+                self.outLastStack()
             self.cache_data[key] = item
-
+            
     def get(self, key):
-        """Retrieve an item from the LIFO Cache."""
-        if key in self.cache_data:
-            return self.cache_data[key]
+        if key in self.cache_data.keys():
+            return self.cache_data.get(key)
         else:
             return None
 
-    def discard_last_item(self):
-        """Remove the least recently used item from the LIFO Cache."""
-        delete_index = self.cache_data.popitem()
-        print("DISCARD: {}".format(delete_index[0]))
+    def outLastStack(self):
+        deleteIndex=self.cache_data.popitem()
+        print("DISCARD: {}".format(deleteIndex[0]))
