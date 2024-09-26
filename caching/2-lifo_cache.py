@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-BaseCaching = __import__('base_caching').BaseCaching
 
 """ Basic LIFO cache implementation. """
+
+BaseCaching = __import__('base_caching').BaseCaching
 
 class LIFOCache(BaseCaching):
     """ LIFO caching system that inherits from BaseCaching """
