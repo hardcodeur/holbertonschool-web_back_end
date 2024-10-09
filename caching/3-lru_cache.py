@@ -26,7 +26,7 @@ class LRUCache(BaseCaching):
         """
         if key is not None and item is not None:
             if key not in self.cache_data and len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                self.discard_last_item()
+                self.discardFirstItem()
             self.cache_data[key] = item
             self.liftItemInStack(key)
 
@@ -44,7 +44,7 @@ class LRUCache(BaseCaching):
             return self.cache_data.get(key)
         return None
 
-    def discard_last_item(self):
+    def discardFirstItem(self):
         """Removes the least recently used item from the cache."""
         deleteIndex = self.cache_data.popitem()
         print("DISCARD: {}".format(deleteIndex[0]))
