@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Route module for the API.
-This module contains the Flask application and the route handling 
+
+This module contains the Flask application and the route handling
 for the API with appropriate error handling and authentication setup.
 """
 
@@ -24,35 +25,44 @@ if os.environ.get("AUTH_TYPE") == "basic_auth":
 else:
     auth = Auth()
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """Not found handler.
-    
-    Returns a JSON response with a 404 error message.
+
+    Returns:
+        str: A JSON response with a 404 error message.
     """
     return jsonify({"error": "Not found"}), 404
+
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """Unauthorized handler.
-    
-    Returns a JSON response with a 401 error message.
+
+    Returns:
+        str: A JSON response with a 401 error message.
     """
     return jsonify({"error": "Unauthorized"}), 401
+
 
 @app.errorhandler(403)
 def forbidden(error) -> str:
     """Forbidden handler.
-    
-    Returns a JSON response with a 403 error message.
+
+    Returns:
+        str: A JSON response with a 403 error message.
     """
     return jsonify({"error": "Forbidden"}), 403
+
 
 @app.before_request
 def before_request():
     """Before request handler.
-    
-    Checks the authorization and handles paths requiring authentication.
+
+    This function checks if the request path requires authentication.
+    If it does, it verifies the authorization header and handles
+    authentication for the API routes.
     """
     if auth is None:
         return
@@ -65,6 +75,7 @@ def before_request():
         abort(401)
     if auth.current_user(request) is None:
         abort(403)
+
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
