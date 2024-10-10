@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+Auth module for handling authentication related tasks.
+
+This module defines the `Auth` class responsible for checking 
+if authentication is required, handling authorization headers, 
+and managing the current user.
+"""
 
 from typing import TypeVar, List
 from flask import request
@@ -12,6 +19,12 @@ class Auth:
         """
         Determines if authentication is required for the given path.
 
+        Args:
+            path (str): The path to check.
+            excluded_paths (List[str]): A list of paths that do not require authentication.
+
+        Returns:
+            bool: True if authentication is required, False otherwise.
         """
         if path is None:
             return True
@@ -27,6 +40,12 @@ class Auth:
     def authorization_header(self, request=None) -> str:
         """
         Retrieves the Authorization header from the request.
+
+        Args:
+            request (Request): The request object to extract the header from.
+
+        Returns:
+            str: The value of the Authorization header or None if not present.
         """
         if request is None:
             return None
@@ -34,7 +53,13 @@ class Auth:
 
     def current_user(self, request=None) -> TypeVar('User'):
         """
-        Gets the current user from the request.
+        Retrieves the current user from the request.
+
+        Args:
+            request (Request): The request object to extract the user from.
+
+        Returns:
+            User: The current user associated with the request or None.
         """
         return request
 
@@ -42,8 +67,13 @@ class Auth:
     def slash_tolerant(value: str) -> str:
         """
         Removes the trailing slash from a string if present.
+
+        Args:
+            value (str): The string to process.
+
+        Returns:
+            str: The string without a trailing slash.
         """
         if value.endswith('/'):
             return value[:-1]
         return value
-
