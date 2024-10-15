@@ -4,8 +4,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 from user import User
-from typing import TypeVar
 
 from user import Base
 
@@ -22,12 +23,6 @@ class DB:
         Base.metadata.create_all(self._engine)
         self.__session = None
     
-    def add_user(self,email:str,hashed_password:str)->TypeVar('User'):
-
-        new_user = User(email=email, name="", hashed_password=hashed_password,session_id="",reset_token="")
-        self._session.add(new_user)
-        self._session.commit()
-        return new_user
 
 
     @property
@@ -38,3 +33,27 @@ class DB:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
         return self.__session
+
+
+    def add_user(self,email:str,hashed_password:str)->User:
+        """ Add a new user in users table
+        """
+        new_user = User(email=email, name="", hashed_password=hashed_password,session_id="",reset_token="")
+        self._session.add(new_user)
+        self._session.commit()
+        return new_user
+    
+    def find_user_by(self,**kwargs:str)->User:
+        """ Find first user by arguments
+        """
+        try:
+            user=self._session.query(User).filter_by(**kwargs).first()
+            if user is None:
+                raise NoResultFound
+            return user
+        except InvalidRequestError:
+            raise
+    
+    def update_user(self,**kwargs:str)->None:
+        """ Update user by arguments
+        """
