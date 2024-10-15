@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
 """DB module
-This module provides a DB class that handles interactions with a SQLite database.
-It manages user data using SQLAlchemy ORM.
+This module provides a DB class to interact with the database using SQLAlchemy ORM.
 """
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.exc import InvalidRequestError
-from user import User, Base
+from user import Base, User  # Import User model
 
 
 class DB:
-    """DB class
-    This class provides methods to interact with the database, such as adding and finding users.
+    """DB class to interact with the database.
+
+    This class manages the database connection and provides methods
+    for adding users to the database.
     """
 
     def __init__(self) -> None:
-        """Initialize a new DB instance.
-        Creates a new SQLite database (if not already existing), and initializes the session.
+        """Initialize a new DB instance and set up the database.
+
+        It creates a new SQLite database (if not existing), drops all
+        tables to ensure a clean state, and initializes the session.
         """
         self._engine = create_engine("sqlite:///a.db", echo=True)
         Base.metadata.drop_all(self._engine)
@@ -28,8 +29,10 @@ class DB:
 
     @property
     def _session(self) -> Session:
-        """Memoized session object.
-        Returns the current session or creates a new one if none exists.
+        """Memoized session object to ensure only one session is used.
+
+        Returns:
+            Session: The current session object.
         """
         if self.__session is None:
             DBSession = sessionmaker(bind=self._engine)
@@ -37,39 +40,18 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """Add a new user to the users table.
-        
+        """Add a new user to the database.
+
         Args:
-            email (str): The email of the new user.
-            hashed_password (str): The hashed password of the new user.
+            email (str): The user's email address.
+            hashed_password (str): The user's hashed password.
 
         Returns:
-            User: The newly created user object.
+            User: The newly created User object.
         """
         new_user = User(email=email, hashed_password=hashed_password)
+        
         self._session.add(new_user)
         self._session.commit()
+        
         return new_user
-
-    def find_user_by(self, **kwargs: str) -> User:
-        """Find the first user that matches the provided filter arguments.
-        
-        Args:
-            **kwargs: Arbitrary keyword arguments for filtering the user.
-        
-        Returns:
-            User: The first user found that matches the filters.
-
-        Raises:
-            InvalidRequestError: If no arguments are provided.
-            NoResultFound: If no user matches the criteria.
-        """
-        if not kwargs:
-            raise InvalidRequestError("No arguments provided for filtering.")
-
-        user = self._session.query(User).filter_by(**kwargs).first()
-
-        if user is None:
-            raise NoResultFound("No user found matching the criteria.")
-
-        return user
