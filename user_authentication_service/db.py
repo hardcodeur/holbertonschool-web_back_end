@@ -54,6 +54,6 @@ class DB:
         except InvalidRequestError:
             raise
     
-    def update_user(self,**kwargs:str)->None:
-        """ Update user by arguments
-        """
+    # def update_user(self,**kwargs:str)->None:
+    #     """ Update user by arguments
+    #     """
