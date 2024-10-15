@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
-"""Class User for ORM"""
+"""User module for ORM
+This module defines the User class for SQLAlchemy ORM, representing a user in the database.
+"""
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
+
 Base = declarative_base()
 
 
 class User(Base):
-    """User Table"""
+    """User class
+    This class represents the 'users' table in the database.
+    """
     __tablename__ = 'users'
-    id = Column(Integer, primary_key=True)
-    email = Column(String(250), nullable=False)
-    hashed_password = Column(String(250), nullable=False)
-    session_id = Column(String(250))
-    reset_token = Column(String(250))
+
+    id: int = Column(Integer, primary_key=True)
+    email: str = Column(String(250), nullable=False)
+    hashed_password: str = Column(String(250), nullable=False)
+    session_id: str | None = Column(String(250), nullable=True)
+    reset_token: str | None = Column(String(250), nullable=True)
