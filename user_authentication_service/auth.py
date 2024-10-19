@@ -82,6 +82,20 @@ class Auth:
         self._db.update_user(user.id, session_id=session_id)
         return session_id
 
+    def get_user_from_session_id(self, session_id: str) -> User | None:
+        """ Retrieves a user using their session ID.
+        Args:
+            session_id (str): The session ID of the user.
+        Returns:
+            User | None: The user object if found, or None if no user matches the session ID.
+        """
+        try:
+            user = self._db.find_user_by(session_id=session_id)
+        except NoResultFound:
+            return None
+        
+        return user
+
 
 def _hash_password(password: str) -> bytes:
     """ Hashes a password using bcrypt.
