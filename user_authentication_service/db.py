@@ -67,12 +67,12 @@ class DB:
         Returns: None
         """
         if not kwargs:
-            raise InvalidRequestError("No fields to update provided")
+            raise InvalidRequestError
 
         column_names = User.__table__.columns.keys()
         for key in kwargs.keys():
             if key not in column_names:
-                raise InvalidRequestError(f"Invalid column: {key}")
+                raise InvalidRequestError
 
         user = self.find_user_by(id=user_id)
 
