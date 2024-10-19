@@ -17,8 +17,11 @@ def hello_world() -> str:
 @app.route('/users', methods=['POST'])
 def users() -> str:
     """ Registers a new user if it does not exist before"""
-    email = request.form['email']
-    password = request.form['password']
+    try :
+        email = request.form['email']
+        password = request.form['password']
+    except : 
+        abort(400)
 
     try:
         user = AUTH.register_user(email, password)
