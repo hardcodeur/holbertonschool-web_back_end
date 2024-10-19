@@ -118,13 +118,7 @@ def reset_password() -> str:
 
 @app.route('/reset_password', methods=['PUT'])
 def update_password() -> str:
-    """ PUT /reset_password
-    Updates password with reset token
-    Return:
-        - 400 if bad request
-        - 403 if not valid reset token
-        - 200 and JSON Payload if valid
-    """
+    """ PUT /reset_password Updates password with reset token """
     try:
         email = request.form['email']
         reset_token = request.form['reset_token']
