@@ -33,7 +33,6 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """ Adds user to database
-
         Return: User Object
         """
         user = User(email=email, hashed_password=hashed_password)
@@ -62,8 +61,7 @@ class DB:
         return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        """
-        Updates the attributes of a user in the database.
+        """ Updates the attributes of a user in the database.
         Returns: None
         """
         if not kwargs:
