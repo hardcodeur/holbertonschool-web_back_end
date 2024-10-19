@@ -64,6 +64,24 @@ class Auth:
             return False
         return True
 
+    def create_session(self, email: str) -> str | None:
+        """
+        Creates a new session for the user and returns the session ID.
+        Args:
+            email (str): The user's email.
+        Returns:
+            str | None: The session ID if the session is created,
+            None otherwise.
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return None
+
+        session_id = _generate_uuid()
+        self._db.update_user(user.id, session_id=session_id)
+        return session_id
+
 
 def _hash_password(password: str) -> bytes:
     """ Hashes a password using bcrypt.
