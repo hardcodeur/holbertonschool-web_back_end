@@ -87,15 +87,16 @@ class Auth:
         Args:
             session_id (str): The session ID of the user.
         Returns:
-            User | None: The user object if found, or None if no user matches the session ID.
+            User | None: The user object if found,
+            or None if no user matches the session ID.
         """
         try:
             user = self._db.find_user_by(session_id=session_id)
         except NoResultFound:
             return None
-        
+
         return user
-    
+
     def destroy_session(self, user_id: str) -> None:
         """ Destroys a user's session by setting their session ID to None.
         Args:
