@@ -82,7 +82,7 @@ class Auth:
         self._db.update_user(user.id, session_id=session_id)
         return session_id
 
-    def get_user_from_session_id(self, session_id: str) -> User | None:
+    def get_user_from_session_id(self, session_id: str) -> User:
         """ Retrieves a user using their session ID.
         Args:
             session_id (str): The session ID of the user.
