@@ -24,8 +24,8 @@ class User(Base):
     
     __tablename__ = 'users'
 
-    id: int = Column(Integer, primary_key=True, autoincrement=True)
-    email: str = Column(String(250), nullable=False)
-    hashed_password: str = Column(String(250), nullable=False)
-    session_id: str | None = Column(String(250), nullable=True)
-    reset_token: str | None = Column(String(250), nullable=True)
+    id = int = Column(Integer, primary_key=True, autoincrement=True)
+    email = str = Column(String(250), nullable=False)
+    hashed_password = str = Column(String(250), nullable=False)
+    session_id = str | None = Column(String(250), nullable=True)
+    reset_token = str | None = Column(String(250), nullable=True)
