@@ -60,3 +60,23 @@ class DB:
             raise NoResultFound
 
         return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """
+        Updates the attributes of a user in the database.
+        Returns: None
+        """
+        if not kwargs:
+            raise InvalidRequestError("No fields to update provided")
+
+        column_names = User.__table__.columns.keys()
+        for key in kwargs.keys():
+            if key not in column_names:
+                raise InvalidRequestError(f"Invalid column: {key}")
+
+        user = self.find_user_by(id=user_id)
+
+        for key, value in kwargs.items():
+            setattr(user, key, value)
+
+        self._session.commit()
