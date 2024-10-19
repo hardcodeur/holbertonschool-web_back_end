@@ -12,7 +12,6 @@ import uuid
 class Auth:
     """
     Auth class to interact with the authentication database.
-    
     Methods:
         register_user: Registers a new user with an email and a password.
         get_user_from_session_id: Retrieves a user using the session ID.
@@ -30,14 +29,11 @@ class Auth:
     def register_user(self, email: str, password: str) -> User:
         """
         Registers a user if the email is not already in use.
-        
         Args:
             email (str): The user's email.
             password (str): The user's password.
-        
         Returns:
             User: The newly created user.
-        
         Raises:
             ValueError: If the user already exists.
         """
