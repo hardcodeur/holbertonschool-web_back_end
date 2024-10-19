@@ -46,19 +46,18 @@ class DB:
         """
         Finds a user in the database using keyword arguments for filtering.
         """
+
         if not kwargs:
-            raise InvalidRequestError(
-                "No keyword arguments provided for search"
-            )
+            raise InvalidRequestError
 
         column_names = User.__table__.columns.keys()
         for key in kwargs.keys():
             if key not in column_names:
-                raise InvalidRequestError(f"Invalid column: {key}")
+                raise InvalidRequestError
 
         user = self._session.query(User).filter_by(**kwargs).first()
 
         if user is None:
-            raise NoResultFound()
+            raise NoResultFound
 
         return user
