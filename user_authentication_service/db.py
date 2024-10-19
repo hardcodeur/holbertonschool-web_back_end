@@ -17,7 +17,7 @@ class DB:
     def __init__(self) -> None:
         """Initialize a new DB instance
         """
-        self._engine = create_engine("sqlite:///a.db", echo=True)
+        self._engine = create_engine("sqlite:///a.db", echo=False)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -43,10 +43,9 @@ class DB:
         return user
 
     def find_user_by(self, **kwargs) -> User:
+        """ Finds user by key word args
+        Return: First row found in the users table as filtered by kwargs
         """
-        Finds a user in the database using keyword arguments for filtering.
-        """
-
         if not kwargs:
             raise InvalidRequestError
 
