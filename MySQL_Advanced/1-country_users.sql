@@ -1,7 +1,5 @@
 -- SQL script that creates a table users
 
-USE hbtn_0d_tvshows
-
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE IF NOT EXISTS users(

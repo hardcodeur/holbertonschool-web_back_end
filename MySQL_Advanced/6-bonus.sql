@@ -1,7 +1,5 @@
 -- SQL script that creates a stored procedure AddBonus that adds a new correction for a student.
 
-USE hbtn_0d_tvshows
-
 DROP PROCEDURE IF EXISTS AddBonus;
 
 DELIMITER //
