@@ -5,6 +5,7 @@ import redis
 import uuid
 
 def count_calls(method: Callable) -> Callable:
+    """ Decorator that counts the number of times a function is called """
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         key = f"{method.__qualname__}"
@@ -13,6 +14,7 @@ def count_calls(method: Callable) -> Callable:
     return wrapper
 
 def call_history(method: Callable) -> Callable:
+    """ Decorator to store the history of inputs and outputs for a function """
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         input_key = f"{method.__qualname__}:inputs"
@@ -27,6 +29,7 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 def replay(method: Callable):
+    """ Display the history of calls of a particular function """
     redis_instance = redis.Redis()
     function_name = method.__qualname__
     call_count = redis_instance.get(function_name)
