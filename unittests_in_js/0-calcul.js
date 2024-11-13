@@ -1,6 +1,8 @@
 
 let calculateNumber = (a,b)=>{
-    return Math.ceil(a+b)
+    a = Math.round(a)
+    b = Math.round(b)
+    return a+b
 }
 
-module.exports = calculateNumber()
+module.exports = calculateNumber

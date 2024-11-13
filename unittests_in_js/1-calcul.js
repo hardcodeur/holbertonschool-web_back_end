@@ -5,7 +5,7 @@ let calculateNumber = (type,a,b)=>{
 
     switch (type) {
         case "SUM":
-            return Math.ceil(a+b);
+            return a+b;
         break;
         case "SUBTRACT":
             return a-b;
