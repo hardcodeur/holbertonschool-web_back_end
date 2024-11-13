@@ -1,31 +1,22 @@
-let Untils = {
+const Utils = {
+    calculateNumber(type, a, b) {
+        a = Math.round(a);
+        b = Math.round(b);
 
-    calculateNumber(type,a,b){
-
-        a = Math.round(a)
-        b = Math.round(b)
-    
         switch (type) {
             case "SUM":
-                return Math.ceil(a+b);
-            break;
+                return Math.ceil(a + b);
             case "SUBTRACT":
-                return a-b;
-            break;
+                return a - b;
             case "DIVIDE":
-    
-                if(b === 0){
+                if (b === 0) {
                     return "Error";
                 }
-    
-                return a/b;
-            break;
-        
+                return a / b;
             default:
-                new Error('Parameter value is not valide');
-            break;
+                throw new Error("Parameter value is not valid");
         }
     }
-}
+};
 
-module.export=Untils
+module.exports = Utils;
