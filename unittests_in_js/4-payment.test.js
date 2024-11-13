@@ -2,7 +2,7 @@ let sinon = require("sinon");
 let expect = require("chai").expect;
 
 let sendPaymentRequestToApi = require("./3-payment")
-let Untils = require("./utils")
+let untils = require("./utils")
 
 // import sinon from "sinon";
 // import { expect } from "chai";
@@ -12,7 +12,7 @@ let Untils = require("./utils")
 
 describe("sendPaymentRequestToApi",()=>{
     it('should call the payment api',()=>{
-        const utils = new Utils();
+        const utils = new untils();
         const stub = sinon.stub(utils,"calculateNumber").returns(10);
         const spy = sinon.spy(console, "log");
         
