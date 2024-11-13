@@ -1,4 +1,4 @@
-export const calculateNumber = (type,a,b)=>{
+const calculateNumber = (type,a,b)=>{
 
     a = Math.round(a)
     b = Math.round(b)
@@ -24,3 +24,5 @@ export const calculateNumber = (type,a,b)=>{
         break;
     }
 }
+
+module.exports = calculateNumber
