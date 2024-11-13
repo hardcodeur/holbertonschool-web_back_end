@@ -1,12 +1,10 @@
-let Untils = {
+export class Utils {
     calculateNumber(type,a,b){
-
         a = Math.round(a)
         b = Math.round(b)
-    
         switch (type) {
             case "SUM":
-                return Math.ceil(a+b);
+                return a+b;
             break;
             case "SUBTRACT":
                 return a-b;
@@ -26,5 +24,3 @@ let Untils = {
         }
     }
 }
-
-module.export=Untils;
