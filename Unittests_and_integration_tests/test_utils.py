@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Test untils """
+""" Test Utils """
 import unittest
 from unittest.mock import patch, Mock
 from parameterized import parameterized
