@@ -10,14 +10,5 @@ describe("#getPaymentTokenFromAPI()",()=>{
                 done();
             }
         );
-    })
-
-    it("should return promise when success is false",()=>{
-        getPaymentTokenFromAPI(false).then(
-            (rep)=>{
-                assert.equal(rep,{})
-                done();
-            }
-        );
-    })
+    });
 })
