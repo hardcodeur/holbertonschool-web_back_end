@@ -1,14 +1,11 @@
+const getPaymentTokenFromAPI = require('./6-payment_token');
 const { expect } = require('chai');
-const getPaymentTokenFromAPI = require("./6-payment_token");
 
-describe("#getPaymentTokenFromAPI()",()=>{
-
-    it("should return promise when success is true",()=>{
-        getPaymentTokenFromAPI(true).then(
-            (rep)=>{
-                expect(rep).to.eql({ data: 'Successful response from the API' });
-                done();
-            }
-        );
-    });
-})
+describe('getPaymentTokenFromAPI', () => {
+	it('should return success message when success is true', (done) => {
+		getPaymentTokenFromAPI(true).then((response) => {
+			expect(response).to.eql({ data: 'Successful response from the API' });
+			done();
+		});
+	});
+});
