@@ -1,4 +1,4 @@
-const assert = require('assert');
+const { expect } = require('chai');
 const getPaymentTokenFromAPI = require("./6-payment_token");
 
 describe("#getPaymentTokenFromAPI()",()=>{
@@ -6,7 +6,7 @@ describe("#getPaymentTokenFromAPI()",()=>{
     it("should return promise when success is true",()=>{
         getPaymentTokenFromAPI(true).then(
             (rep)=>{
-                assert.equal(rep,{ data: 'Successful response from the API' })
+                expect(rep).to.eql({ data: 'Successful response from the API' });
                 done();
             }
         );
